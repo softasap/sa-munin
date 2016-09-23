@@ -1,0 +1,6 @@
+---
+# tasks file for sa-munin
+   - include: tasks_munin_node.yml
+
+   - include: tasks_munin_master.yml
+     when: munin_mode == "master"

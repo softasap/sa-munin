@@ -1,0 +1,23 @@
+---
+- hosts: www
+
+  vars:
+    - root_dir: ..
+    - munin_role: master
+
+
+  pre_tasks:
+    - debug: msg="Pre tasks section"
+
+  roles:
+     - {
+         role: "sa-nginx"
+       }
+     - {
+         role: "sa-munin",
+         munin_mode: "{{munin_role}}"
+       }
+
+
+  tasks:
+    - debug: msg="Tasks section"

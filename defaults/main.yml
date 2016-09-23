@@ -1,0 +1,7 @@
+---
+# defaults file for sa-munin
+   munin_mode: node # master
+
+   munin_node_properties: []
+
+   munin_master_properties: []

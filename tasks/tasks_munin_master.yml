@@ -1,0 +1,15 @@
+---
+
+  - name: MUNIN | Install munin master package
+    apt: pkg="munin"
+    become: yes
+    tags:
+      - munin
+
+  - name: MUNIN | Patch node settings /etc/munin/munin.conf
+    lineinfile: dest=/etc/munin/munin.conf  regexp="{{item.regexp}}" line="{{item.line}}" insertafter="{{item.insertafter | default('EOF')}}"
+    with_items: "{{munin_master_properties | default([])}}"
+    notify: restart munin
+    become: yes
+    tags:
+      - munin

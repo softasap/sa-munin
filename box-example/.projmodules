@@ -1,0 +1,6 @@
+[submodule "roles/sa-munin"]
+        path = roles/sa-munin
+        url = https://github.com/softasap/sa-munin.git
+[submodule "roles/sa-nginx"]
+        path = roles/sa-nginx
+        url = https://github.com/softasap/sa-nginx.git
