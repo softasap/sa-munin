@@ -12,7 +12,7 @@
 
   - name: MUNIN | Enable plugins
     file: path="/etc/munin/plugins/{{item}}" src="/usr/share/munin/plugins/{{item}}" state=link force=yes
-    with_items: "{{munin_plugins}}"
+    with_items: "{{munin_plugins | default([]) }}"
     become: yes
     tags:
       - munin
