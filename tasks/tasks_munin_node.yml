@@ -17,8 +17,8 @@
     tags:
       - munin
 
-  - name: MUNIN | Patch node settings /etc/munin/munin.conf
-    lineinfile: dest=/etc/munin/munin.conf  regexp="{{item.regexp}}" line="{{item.line}}" insertafter="{{item.insertafter | default('EOF')}}"
+  - name: MUNIN | Patch node settings /etc/munin/munin-node.conf
+    lineinfile: dest=/etc/munin/munin-node.conf  regexp="{{item.regexp}}" line="{{item.line}}" insertafter="{{item.insertafter | default('EOF')}}"
     with_items: "{{munin_node_properties | default([])}}"
     notify: restart munin
     become: yes

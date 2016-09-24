@@ -2,7 +2,7 @@
 - hosts: www
 
   vars:
-    - root_dir: ..
+    - root_dir: "{{playbook_dir}}"
     - munin_role: master
 
 
@@ -21,3 +21,4 @@
 
   tasks:
     - debug: msg="Tasks section"
+    - include: "{{root_dir}}/demosite.yml"

@@ -1,0 +1,23 @@
+---
+  - name: Nginx | configure web startup
+    template: src="{{root_dir}}/templates/nginx/site.conf.j2" dest="/etc/nginx/sites-available/munin"
+    become: yes
+    tags:
+      - create
+      - update
+
+
+  - name: Nginx | Enable sites
+    command: ln -fs /etc/nginx/sites-available/munin /etc/nginx/sites-enabled/munin creates=/etc/nginx/sites-enabled/munin
+    become: yes
+    tags:
+      - create
+      - update
+
+  - name: Nginx | Restart
+    service: name="nginx" state=restarted
+    become: yes
+    tags:
+      - create
+      - update
+

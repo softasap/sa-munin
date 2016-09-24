@@ -1,0 +1,22 @@
+server {
+    listen 80 default_server;
+    server_name munin.voronenko.net;
+
+    location /munin/static/ {
+        alias /etc/munin/static/;
+    }
+
+    location /munin/ {
+#        auth_basic            "Restricted";
+        # Create the htpasswd file with the htpasswd tool.
+#        auth_basic_user_file  /etc/nginx/htpasswd;
+
+        alias /var/cache/munin/www/;
+    }
+
+
+    location / {
+         default_type text/plain;
+         return 200 "scheme: $scheme";
+    }
+}
