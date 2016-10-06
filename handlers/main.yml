@@ -1,2 +1,33 @@
 ---
 # handlers file for sa-munin
+
+- name: start munin-node
+  service: name=munin-node state=started enabled=yes
+  become: yes
+  when: docker_test is not defined
+
+- name: restart munin-node
+  service: name=munin-node state=restarted enabled=yes
+  become: yes
+  when: docker_test is not defined
+
+- name: reload munin-node
+  service: name=munin-node state=reloaded enabled=yes
+  become: yes
+  when: docker_test is not defined
+
+- name: start munin
+  service: name=munin state=started enabled=yes
+  become: yes
+  when: docker_test is not defined
+
+- name: restart munin
+  service: name=munin state=restarted enabled=yes
+  become: yes
+  when: docker_test is not defined
+
+- name: reload munin
+  service: name=munin state=reloaded enabled=yes
+  become: yes
+  when: docker_test is not defined
+
