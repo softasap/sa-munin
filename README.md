@@ -6,7 +6,7 @@ sa-munin
 
 Simple usage for node:
 
-```
+```YAML
 roles:
      - {
          role: "sa-munin"
@@ -16,7 +16,7 @@ roles:
 
 Simple usage for master:
 
-```
+```YAML
 roles:
      - {
          role: "sa-munin",
@@ -48,7 +48,7 @@ location /munin/ {
 
 After install you can get suggestions, what other plugins you can use on your host:
 
-```
+```SHELL
 
 /etc/munin$ sudo munin-node-configure --suggest
 Plugin                     | Used | Suggestions                            
@@ -68,6 +68,24 @@ cpu                        | yes  | yes
 
 ```
 
+# Mail notifications
+
+contact.email.command mail -s "Munin-notification for ${var:group}::${var:host}" root@localhost
+contact.log.command tee -a /var/log/munin/alert.log
+
+Forcing email to be sent for check
+`su - munin --shell=/bin/bash -c "/usr/share/munin/munin-limits --contact email --force"`
+
+Troubleshouting queues:
+
+purge queue: `postsuper -d ALL`
+
+purge deferred queue: `postsuper -d ALL deferred`
+
+view queue `mailq`
+
+when configure with postfix, remember, that on debian systems , the default sender's domain used is specified by `/etc/mailname`. AFAIK this is a Debian specific modification to postfix.
+
 # combining with other roles
 
 I recommend adding conf.d dir both, for master and node configs.
@@ -80,3 +98,37 @@ includedir /etc/munin/munin-conf.d
 
 If you need to do it in the middle of the roles play, you can use include role.
 See example of such role here:  https://github.com/softasap/sa-include
+
+
+
+Usage with ansible galaxy workflow
+----------------------------------
+
+If you installed the sa-munin role using the command
+
+`
+   ansible-galaxy install softasap.sa-munin
+`
+
+the role will be available in the folder library/softasap.sa-munin
+Please adjust the path accordingly.
+
+```YAML
+
+     - {
+         role: "softasap.sa-munin"
+       }
+
+```
+
+
+
+Copyright and license
+---------------------
+
+
+Code licensed under the [BSD 3 clause] (https://opensource.org/licenses/BSD-3-Clause) or the [MIT License] (http://opensource.org/licenses/MIT).
+
+Subscribe for roles updates at [FB] (https://www.facebook.com/SoftAsap/)
+
+Join gitter discussion channel at [Gitter](https://gitter.im/softasap)
